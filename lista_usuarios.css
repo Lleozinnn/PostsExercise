@@ -1,0 +1,75 @@
+.users-table {
+width: 100%;
+border-collapse: collapse;
+background: #ffffff;
+border-radius: 12px;
+overflow: hidden;
+font-family: "Sora", sans-serif;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+.users-table thead {
+background: #f5f7fa;
+}
+.users-table th {
+padding: 18px 20px;
+color: #555f6d;
+font-size: 13px;
+font-weight: 600;
+text-align: left;
+border-bottom: 1px solid #e8ebef;
+}
+.users-table td {
+padding: 18px 20px;
+color: #252a31;
+font-size: 14px;
+border-bottom: 1px solid #edf0f2;
+}
+.users-table tbody tr {
+transition: background 0.2s ease;
+}
+.users-table tbody tr:hover {
+background: #fafbfc;
+}
+.users-table tbody tr:last-child td {
+border-bottom: none;
+}
+.actions {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.actions button {
+border: none;
+border-radius: 7px;
+padding: 8px 13px;
+font-family: inherit;
+font-size: 12px;
+font-weight: 600;
+cursor: pointer;
+transition: 0.2s ease;
+}
+.btn-edit {
+background: #eef4ff;
+color: #3575d3;
+}
+.btn-edit:hover {
+background: #dce9ff;
+}
+.btn-delete {
+background: #fff0f0;
+color: #d64545;
+}
+.btn-delete:hover {
+background: #ffe0e0;
+}
+@media (max-width: 700px) {
+.users-table {
+min-width: 650px;
+}
+}
+@media (max-width: 700px) {
+.users-table {
+display: block;
+overflow-x: auto;
+}
+}

@@ -52,7 +52,8 @@ function criaMenu ($status = false, $titulo) {
     }
     else {
         $additionalCss = "";
-        if (basename($_SERVER['PHP_SELF']) == "login.php") $additionalCss = '<link rel="stylesheet" href="login.css">';
+        if (basename($_SERVER['PHP_SELF']) == "login.php" || basename($_SERVER['PHP_SELF']) == "form.php") $additionalCss = '<link rel="stylesheet" href="login.css">';
+        if (basename($_SERVER['PHP_SELF']) == "lista_usuarios.php") $additionalCss = '<link rel="stylesheet" href="lista_usuarios.css">';
         $topo = '<!DOCTYPE html>
         <html lang="pt-BR">
         <head>
@@ -113,5 +114,61 @@ function criaMensagem ($tipo = "sucesso", $mensagem) {
         $elMensagem = '<p class="msg erro" id="mensagem">'.$mensagem.'</p>';
     }
     return $elMensagem;
+}
+function criaCadastro () {
+    return '<main>
+  <form class="login-form" action="inserirUsuario.php" method="POST">
+    <div class="login-form__header">
+        <span class="login-form__tag">CADASTRO</span>
+        <h2>Cadastrar</h2>
+        <p>Informe seus dados para acessar o sistema.</p>
+    </div>
+    <div class="login-form__group">
+        <label for="login">E-mail</label>
+        <input type="text" id="login" name="email" placeholder="Digite seu login" autocomplete="username" required>
+    </div>
+    <div class="login-form__group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="login-form__submit">Cadastrar</button>
+</form>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let mensagem = document.querySelector("#mensagem");
+        setTimeout(() => {
+            mensagem.remove();
+        }, 7000);
+    })
+</script>';
+}
+function criaLogin () {
+    return '<main>
+  <form class="login-form" action="processarLogin.php" method="POST">
+    <div class="login-form__header">
+        <span class="login-form__tag">ÁREA RESTRITA</span>
+        <h2>Acessar</h2>
+        <p>Informe seus dados para acessar o sistema.</p>
+    </div>
+    <div class="login-form__group">
+        <label for="login">Login</label>
+        <input type="text" id="login" name="login" placeholder="Digite seu login" autocomplete="username" required>
+    </div>
+    <div class="login-form__group">
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Digite sua senha" autocomplete="current-password" required>
+    </div>
+    <button type="submit" class="login-form__submit">Entrar</button>
+</form>
+</main>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        let mensagem = document.querySelector("#mensagem");
+        setTimeout(() => {
+            mensagem.remove();
+        }, 7000);
+    })
+</script>';
 }
 ?>

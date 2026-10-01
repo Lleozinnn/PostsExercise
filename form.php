@@ -5,12 +5,12 @@ if (@$_SESSION['isLogged']) {
     $_SESSION["messageType"] = null;
     header("Location: perfil.php");
 }
-criarTopo("Login");
+criarTopo("Cadastro");
 if (@$_SESSION["messageLogin"]) {
         echo criaMensagem($_SESSION["messageType"], $_SESSION["messageLogin"]);
         $_SESSION["messageType"] = null;
         $_SESSION["messageLogin"] = null;
 }
-echo criaLogin()
+echo criaCadastro();
 echo $rodape;
 ?>
