@@ -5,7 +5,7 @@ criarTopo("Perfil");
 ?>
 <main>
     <p><?php
-        echo "Bem vindo ".@$_SESSION['user'];
+        echo "Bem vindo ".@$_SESSION['user']["email"];
     ?></p>
 </main>
 

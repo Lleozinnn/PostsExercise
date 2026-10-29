@@ -1,11 +1,15 @@
 <?php
+require("conn.php");
+require("buscarLogin.php");
 session_start();
+
 $login = $_POST["login"];
 $senha = md5($_POST["senha"]);
 
-function processarLogin ($login, $senha) {
-    $msg = "";
-    if ($login == "leozinnn" && $senha == md5("2564")) {
+function processarLogin ($login, $senha, $conn) {
+    $login = buscarLogin($login, $senha, $conn);
+    if (isset($login)) {
+        var_dump($login);
         $_SESSION["isLogged"] = true;
         $_SESSION["user"] = $login;
         header("Location: perfil.php");
@@ -18,8 +22,7 @@ function processarLogin ($login, $senha) {
     }
 
 }
-
-processarlogin($login, $senha);
+processarlogin($login, $senha, $conn);
  
 
 ?>

@@ -11,6 +11,6 @@ if (@$_SESSION["messageLogin"]) {
         $_SESSION["messageType"] = null;
         $_SESSION["messageLogin"] = null;
 }
-echo criaLogin()
+echo criaLogin();
 echo $rodape;
 ?>

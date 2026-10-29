@@ -46,7 +46,9 @@ function criaMenu ($status = false, $titulo) {
                 <nav>
                     '.criarLinkMenu("perfil.php","Perfil", 'person-outline' ).'            
                     '.criarLinkMenu("posts.php", "Cadastrar Postagem", 'add-outline').'    
-                    '.criarLinkMenu("sair.php", "Sair", 'exit-outline').'        
+                    '.criarLinkMenu("sair.php", "Sair", 'exit-outline').'
+                    '.criarLinkMenu("deletar_usuario.php", "Excluir dados", 'person-remove-outline').'    
+                    '.criarLinkMenu("editar_usuario.php", "Editar dados", 'brush-outline').'    
                 </nav>
             </header>';
     }
@@ -170,5 +172,77 @@ function criaLogin () {
         }, 7000);
     })
 </script>';
+}
+function criaFormularioEdicao () {
+    echo '<style>
+  main {
+    height: 100%;
+    // max-width: 400px;
+    margin: 40px auto;
+    padding: 24px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  main form .form-group {
+    margin-bottom: 16px;
+  }
+
+  main form label {
+    display: block;
+    margin-bottom: 6px;
+    color: #555555;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  main form input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    box-sizing: border-box;
+  }
+
+  main form input:focus {
+    border-color: #007bff;
+  }
+
+  main form button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  main form button:hover {
+    background-color: #0056b3;
+  }
+</style>
+
+<main>
+  <form action="editar_usuario.php" method="POST">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="text" id="email" name="email">
+    </div>
+    <div class="form-group">
+      <label for="senha">Senha</label>
+      <input type="text" id="senha" name="senha">
+    </div>
+    <button type="submit">Salvar</button>
+  </form>
+</main>';
 }
 ?>
