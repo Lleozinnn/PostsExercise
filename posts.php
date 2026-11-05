@@ -17,24 +17,6 @@ $main = '
             --radius: 12px;
         }
 
-        body {
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 40px 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 30px;
-        }
-
-        h2 {
-            margin-bottom: -10px;
-            color: var(--text-main);
-            font-size: 1.2rem;
-        }
-
         /* Estrutura Base do Card */
         .post-card {
             background-color: var(--card-bg);
@@ -144,10 +126,9 @@ else if (mysqli_num_rows($postagens) > 0) {
         $titulo = $row["titulo"];
         $descricao = $row["descricao"];
         $data = $row["data"];
-        $usuario = $row["nome"];
+        $usuario = $row["email_usuario"];
         $postagem = "";
-        print_r($row);
-        if (true) {
+        if ($_SESSION["user"]["email"] !== $usuario) {
             $postagem = '
             <article class="post-card">
                 <div class="post-header">

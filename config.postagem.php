@@ -1,9 +1,18 @@
 <?php
 // CRUD da postagem
 
-// inserirPostagem($titulo, $descricao, $idUsuario, $conn) {
+function inserirPostagem($titulo, $descricao, $idUsuario, $conn) {
+    $sql = "INSERT INTO `postagem` (`titulo`, `descricao`, `data`, `idUsuario`) VALUES ('$titulo', '$descricao', 'NOW()', $idUsuario)";
+    //
+    echo $sql;
 
-// };
+    if (mysqli_query($conn, $sql)) {
+        return 1;
+    }
+    else {
+        return 0;
+    }
+};
 function deletarPostagem($idPostagem, $conn) {
     $sql = "DELETE FROM postagem WHERE `postagem`.`id` = $idPostagem";
     if (mysqli_query($conn, $sql)) {
@@ -17,11 +26,20 @@ function deletarPostagem($idPostagem, $conn) {
     
 // }
 function listarPostagem($conn) {
-    $sql = "SELECT titulo, descricao, data, idUsuario, `postagem`.`nome` AS nome FROM `postagem` INNER JOIN usuarios ON `postagem`.`idUsuario` = `usuarios`.`id`";
+    $sql = "SELECT 
+    postagem.titulo, 
+    postagem.descricao, 
+    postagem.data, 
+    postagem.idUsuario, 
+    usuarios.email AS email_usuario
+FROM postagem 
+INNER JOIN usuarios ON postagem.idUsuario = usuarios.id
+";
     if ($result = mysqli_query($conn, $sql)) {
         return $result;
     }
     else {
+        echo mysqli_error($conn);
         return null;
     }
 };

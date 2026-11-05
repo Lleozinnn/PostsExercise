@@ -1,91 +1,95 @@
 <?php
 session_start();
-function paginaRestrita($logado, $pagina = "login.php", $mensagem = "Você está logado.", $tipoMensagem = "sucesso") {
-if ($logado) {
-    $_SESSION["messageLogin"] = $mensagem;  
+function paginaRestrita($logado, $pagina = "login.php", $mensagem = "Você está logado.", $tipoMensagem = "sucesso")
+{
+  if ($logado) {
+    $_SESSION["messageLogin"] = $mensagem;
     $_SESSION["messageType"] = $tipoMensagem;
-}
-else {
+  } else {
     header("Location: $pagina");
+  }
 }
+function criarTopo($titulo)
+{
+  $isLogged = @$_SESSION["isLogged"];
+  $topo = criaMenu($isLogged, $titulo);
+  echo $topo;
 }
-function criarTopo ($titulo) {
-    $isLogged = @$_SESSION["isLogged"];
-    $topo = criaMenu($isLogged, $titulo);
-    echo $topo;
-}
-function linkAtivo ($link) {
-    $resposta = "";
+function linkAtivo($link)
+{
+  $resposta = "";
 
-    if ($link == basename($_SERVER['PHP_SELF'])) $resposta = "ativo";
-    else $resposta = "";
+  if ($link == basename($_SERVER['PHP_SELF'])) $resposta = "ativo";
+  else $resposta = "";
 
-    return $resposta;
+  return $resposta;
 }
-function criarLinkMenu ($pagina, $conteudoTag, $icone) {
-    $link = '<a class="btn '.linkAtivo($pagina).'" href="'.$pagina.'"><ion-icon name="'.$icone.'"></ion-icon>'.$conteudoTag.'</a>';
-    return $link;
+function criarLinkMenu($pagina, $conteudoTag, $icone)
+{
+  $link = '<a class="btn ' . linkAtivo($pagina) . '" href="' . $pagina . '"><ion-icon name="' . $icone . '"></ion-icon>' . $conteudoTag . '</a>';
+  return $link;
 }
-function criaMenu ($status = false, $titulo) {
-    $topo = "";
-    if ($status) {
-        $topo = '<!DOCTYPE html>
+function criaMenu($status = false, $titulo)
+{
+  $topo = "";
+  if ($status) {
+    $topo = '<!DOCTYPE html>
         <html lang="pt-BR">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Site de Postagens - '.$titulo.'</title>
+            <title>Site de Postagens - ' . $titulo . '</title>
             <link rel="stylesheet" href="styles.css">
         </head>
         <body>
             <header>
                 <div class="dflex-center">
                     <img src="img/logo.png">
-                    <h1>'.$titulo.'</h1>
+                    <h1>' . $titulo . '</h1>
                 </div>
                 <nav>
-                    '.criarLinkMenu("perfil.php","Perfil", 'person-outline' ).'            
-                    '.criarLinkMenu("posts.php", "Cadastrar Postagem", 'add-outline').'    
-                    '.criarLinkMenu("sair.php", "Sair", 'exit-outline').'
-                    '.criarLinkMenu("deletar_usuario.php", "Excluir dados", 'person-remove-outline').'    
-                    '.criarLinkMenu("editar_usuario.php", "Editar dados", 'brush-outline').'    
+                    ' . criarLinkMenu("perfil.php", "Perfil", 'person-outline') . '            
+                    ' . criarLinkMenu("posts.php", "Postagens", 'add-outline') . '
+                    ' . criarLinkMenu("inserirPostagem.php", "Postar", 'add-outline') . '    
+                    ' . criarLinkMenu("sair.php", "Sair", 'exit-outline') . '
+                    ' . criarLinkMenu("deletar_usuario.php", "Excluir dados", 'person-remove-outline') . '    
+                    ' . criarLinkMenu("editar_usuario.php", "Editar dados", 'brush-outline') . '    
                 </nav>
             </header>';
-    }
-    else {
-        $additionalCss = "";
-        if (basename($_SERVER['PHP_SELF']) == "login.php" || basename($_SERVER['PHP_SELF']) == "form.php") $additionalCss = '<link rel="stylesheet" href="login.css">';
-        if (basename($_SERVER['PHP_SELF']) == "lista_usuarios.php") $additionalCss = '<link rel="stylesheet" href="lista_usuarios.css">';
-        $topo = '<!DOCTYPE html>
+  } else {
+    $additionalCss = "";
+    if (basename($_SERVER['PHP_SELF']) == "login.php" || basename($_SERVER['PHP_SELF']) == "form.php") $additionalCss = '<link rel="stylesheet" href="login.css">';
+    if (basename($_SERVER['PHP_SELF']) == "lista_usuarios.php") $additionalCss = '<link rel="stylesheet" href="lista_usuarios.css">';
+    $topo = '<!DOCTYPE html>
         <html lang="pt-BR">
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Site de Postagens - '.$titulo.'</title>
+            <title>Site de Postagens - ' . $titulo . '</title>
             <link rel="stylesheet" href="styles.css">
-            '. $additionalCss .'
+            ' . $additionalCss . '
         </head>
         <body>
             <header>
                 <div class="dflex-center">
                     <img src="img/logo.png">
-                    <h1>'.$titulo.'</h1>
+                    <h1>' . $titulo . '</h1>
                 </div>
                 <nav>
-                    '.criarLinkMenu("posts.php", "Postagens", "document-outline").'
-                    '.criarLinkMenu("login.php", "Acessar", "lock-closed-outline").'
-                    '.criarLinkMenu("contato.php", "Contatos", "paper-plane-outline").'
-                    '.criarLinkMenu("index.php", "Principal", "home-outline").'
+                    ' . criarLinkMenu("posts.php", "Postagens", "document-outline") . '
+                    ' . criarLinkMenu("login.php", "Acessar", "lock-closed-outline") . '
+                    ' . criarLinkMenu("contato.php", "Contatos", "paper-plane-outline") . '
+                    ' . criarLinkMenu("index.php", "Principal", "home-outline") . '
                 </nav>
                 <div>
-                '.criarPesquisa("https://www.google.com/search", "q", "Google", "google").'
-                '.criarPesquisa("https://br.pinterest.com/search/pins/", "q", "Pinterest", "pinterest").'
-                '.criarPesquisa("https://www.youtube.com/results", "search_query", "YouTube", "youtube").'
+                ' . criarPesquisa("https://www.google.com/search", "q", "Google", "google") . '
+                ' . criarPesquisa("https://br.pinterest.com/search/pins/", "q", "Pinterest", "pinterest") . '
+                ' . criarPesquisa("https://www.youtube.com/results", "search_query", "YouTube", "youtube") . '
                 </div>
                 
             </header>';
-    }
-    return $topo;
+  }
+  return $topo;
 }
 $rodape = ' <footer class="dflex-center">
     <p>&copy; 2024 Postagens. Todos os direitos reservados.</p>
@@ -97,28 +101,30 @@ $rodape = ' <footer class="dflex-center">
 </html>';
 
 
-function criarPesquisa ($action, $name, $nome, $logo) {
-    $pesq = '
-        <form action="'.$action.'" method="get" class="formPesq">
-            <ion-icon name="logo-'.$logo.'"></ion-icon>
-            <input type="text" placeholder="Pesquise no '.$nome.'!" name="'.$name.'">
+function criarPesquisa($action, $name, $nome, $logo)
+{
+  $pesq = '
+        <form action="' . $action . '" method="get" class="formPesq">
+            <ion-icon name="logo-' . $logo . '"></ion-icon>
+            <input type="text" placeholder="Pesquise no ' . $nome . '!" name="' . $name . '">
             <button><ion-icon name="search-outline"></ion-icon></button>
         </form>
     ';
-    return $pesq;
+  return $pesq;
 }
-function criaMensagem ($tipo = "sucesso", $mensagem) {
-    $elMensagem = "";
-    if ($tipo == "sucesso") {
-        $elMensagem = '<p class="msg sucesso" id="mensagem">'.$mensagem.'</p>';
-    }
-    else {
-        $elMensagem = '<p class="msg erro" id="mensagem">'.$mensagem.'</p>';
-    }
-    return $elMensagem;
+function criaMensagem($tipo = "sucesso", $mensagem)
+{
+  $elMensagem = "";
+  if ($tipo == "sucesso") {
+    $elMensagem = '<p class="msg sucesso" id="mensagem">' . $mensagem . '</p>';
+  } else {
+    $elMensagem = '<p class="msg erro" id="mensagem">' . $mensagem . '</p>';
+  }
+  return $elMensagem;
 }
-function criaCadastro () {
-    return '<main>
+function criaCadastro()
+{
+  return '<main>
   <form class="login-form" action="inserirUsuario.php" method="POST">
     <div class="login-form__header">
         <span class="login-form__tag">CADASTRO</span>
@@ -145,8 +151,9 @@ function criaCadastro () {
     })
 </script>';
 }
-function criaLogin () {
-    return '<main>
+function criaLogin()
+{
+  return '<main>
   <form class="login-form" action="processarLogin.php" method="POST">
     <div class="login-form__header">
         <span class="login-form__tag">ÁREA RESTRITA</span>
@@ -173,8 +180,9 @@ function criaLogin () {
     })
 </script>';
 }
-function criaFormularioEdicao () {
-    echo '<style>
+function criaFormularioEdicao()
+{
+  echo '<style>
   main {
     height: 100%;
     // max-width: 400px;
@@ -246,8 +254,9 @@ function criaFormularioEdicao () {
 </main>';
 }
 
-function criaPostagem ($emailUser) {
-    echo '
+function criaPostagem($emailUser)
+{
+  echo '
     <style>
     /* Reset básico de caixa e fontes */
 main > * {
@@ -363,7 +372,7 @@ main > * {
       alt="Foto de perfil do usuário" 
       class="avatar"
     >
-    <h1 class="user-name">'.$emailUser.'</h1>
+    <h1 class="user-name">' . $emailUser . '</h1>
   </section>
 
   <!-- Formulário de Envio -->
@@ -395,4 +404,3 @@ main > * {
   </form>
 </main>';
 }
-?>
