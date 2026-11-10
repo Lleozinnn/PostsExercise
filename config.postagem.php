@@ -2,9 +2,7 @@
 // CRUD da postagem
 
 function inserirPostagem($titulo, $descricao, $idUsuario, $conn) {
-    $sql = "INSERT INTO `postagem` (`titulo`, `descricao`, `data`, `idUsuario`) VALUES ('$titulo', '$descricao', 'NOW()', $idUsuario)";
-    //
-    echo $sql;
+    $sql = 'INSERT INTO `postagem` (`titulo`, `descricao`, `data`, `idUsuario`) VALUES ("'.$titulo.'", "'.$descricao.'", CURRENT_TIMESTAMP(), '.$idUsuario.')';
 
     if (mysqli_query($conn, $sql)) {
         return 1;
@@ -15,23 +13,29 @@ function inserirPostagem($titulo, $descricao, $idUsuario, $conn) {
 };
 function deletarPostagem($idPostagem, $conn) {
     $sql = "DELETE FROM postagem WHERE `postagem`.`id` = $idPostagem";
-    if (mysqli_query($conn, $sql)) {
-        return "Postagem deletada com sucesso.";
-    }
-    else {
-        return "Houve um erro ao deletar a postagem.";
-    }
+    $result = mysqli_query($conn, $sql);
+    return $result;
 };
-// editarPostagem(,$conn) {
-    
-// }
+function editarPostagem($titulo, $descricao, $idPostagem, $conn) {
+    $sql = "UPDATE postagem SET titulo = '', descricao = '', `data` = CURRENT_TIMESTAMP() WHERE `postagem`.`id` = $idPostagem";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
+function buscarPostagem ($idPostagem, $conn) {
+    $sql = "SELECT titulo, descricao, id FROM postagem WHERE `postagem`.`id` = $idPostagem";
+    $result = mysqli_query($conn, $sql);
+    return $result;
+}
+
 function listarPostagem($conn) {
     $sql = "SELECT 
     postagem.titulo, 
     postagem.descricao, 
     postagem.data, 
     postagem.idUsuario, 
-    usuarios.email AS email_usuario
+    usuarios.email AS email_usuario,
+    postagem.id AS id_postagem
 FROM postagem 
 INNER JOIN usuarios ON postagem.idUsuario = usuarios.id
 ";

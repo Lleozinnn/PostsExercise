@@ -115,7 +115,7 @@ $main = '
         }
     </style>
     <main>';
-
+$main .= criaMensagem(@$_GET["tipo"], @$_GET["mensagem"]);
 // Listando postagens do banco de dados
 $postagens = listarPostagem($conn);
 if ($postagens == null) {
@@ -127,6 +127,7 @@ else if (mysqli_num_rows($postagens) > 0) {
         $descricao = $row["descricao"];
         $data = $row["data"];
         $usuario = $row["email_usuario"];
+        $idPostagem = $row["id_postagem"];
         $postagem = "";
         if ($_SESSION["user"]["email"] !== $usuario) {
             $postagem = '
@@ -153,8 +154,8 @@ else if (mysqli_num_rows($postagens) > 0) {
                     '.$descricao.'
                 </p>
                 <div class="post-actions">
-                    <button class="btn btn-edit" onclick="editarPost()">Editar</button>
-                    <button class="btn btn-delete" onclick="deletarPost()">Deletar</button>
+                    <a class="btn btn-edit">Editar</a>
+                    <a class="btn btn-delete" href="deletarPostagem.php?act=deletar&idPostagem='.$idPostagem.'">Deletar</a
                 </div>
             </article>';
         }
@@ -165,7 +166,6 @@ else {
     $main .= "<h2>Não há postagens ainda</h2>";
 }
 $main .= '</main>';
-
 
 criarTopo("Posts");
 echo $main;

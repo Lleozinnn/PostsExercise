@@ -8,16 +8,13 @@ criarTopo("Montar Postagem");
 if (@$_GET["act"] == "postar") {
     $titulo = @$_POST["titulo"];
     $descricao = @$_POST["descricao"];
-    $result = inserirPostagem($titulo, $descricao, $conn, $_SESSION["user"]["id"]);
+    $result = inserirPostagem($titulo, $descricao, $_SESSION["user"]["id"], $conn);
     if ($result) {
         echo criaMensagem("sucesso", "Postagem criada com sucesso");
     }
     else {
         echo criaMensagem("erro", "Houve erro ao criar a postagem");
     }
-}
-else {
-
 }
 
 
