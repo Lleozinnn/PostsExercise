@@ -10,11 +10,14 @@ require "config.postagem.php";
 if (@$_GET["act"] == "editar" && isset($_GET["idPostagem"])) {
     $titulo = @$_POST["titulo"];
     $descricao = @$_POST["descricao"];
-    $result = editarPostagem($titulo, $descricao, $_GET["idPostagem"], $conn);
+    $idPostagem = @$_GET["idPostagem"];
+    $result = editarPostagem($titulo, $descricao, $idPostagem, $conn);
+    
     if ($result) {
-        echo criaMensagem("sucesso", "Postagem editada com sucesso");
+        header("Location: posts.php#post$idPostagem");
     }
     else {
+        echo mysqli_error($conn);
         echo criaMensagem("erro", "Houve erro ao editar a postagem");
     }
 }

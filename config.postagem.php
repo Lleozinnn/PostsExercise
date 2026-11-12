@@ -17,7 +17,7 @@ function deletarPostagem($idPostagem, $conn) {
     return $result;
 };
 function editarPostagem($titulo, $descricao, $idPostagem, $conn) {
-    $sql = "UPDATE postagem SET titulo = '', descricao = '', `data` = CURRENT_TIMESTAMP() WHERE `postagem`.`id` = $idPostagem";
+    $sql = "UPDATE postagem SET `titulo` = '$titulo', `descricao` = '$descricao', `data` = CURRENT_TIMESTAMP() WHERE `postagem`.`id` = $idPostagem";
     $result = mysqli_query($conn, $sql);
     return $result;
 }

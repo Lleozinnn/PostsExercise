@@ -131,7 +131,7 @@ else if (mysqli_num_rows($postagens) > 0) {
         $postagem = "";
         if ($_SESSION["user"]["email"] !== $usuario) {
             $postagem = '
-            <article class="post-card">
+            <article class="post-card" id="post'.$idPostagem.'">
                 <div class="post-header">
                     <span class="post-author">'.$usuario.'</span>
                     <span class="post-date">'.$data.'</span>
@@ -144,7 +144,7 @@ else if (mysqli_num_rows($postagens) > 0) {
         }
         else {
             $postagem = '
-            <article class="post-card">
+            <article class="post-card" id="post'.$idPostagem.'">
                 <div class="post-header">
                     <span class="post-author">'.$usuario.'</span>
                     <span class="post-date">'.$data.'</span>
@@ -154,7 +154,7 @@ else if (mysqli_num_rows($postagens) > 0) {
                     '.$descricao.'
                 </p>
                 <div class="post-actions">
-                    <a class="btn btn-edit">Editar</a>
+                    <a class="btn btn-edit" href="editarPostagem.php?idPostagem='.$idPostagem.'">Editar</a>
                     <a class="btn btn-delete" href="deletarPostagem.php?act=deletar&idPostagem='.$idPostagem.'">Deletar</a
                 </div>
             </article>';

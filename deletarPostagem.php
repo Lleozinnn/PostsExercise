@@ -7,7 +7,7 @@ if (@$_GET["act"] == "deletar") {
     $idPostagem = @$_GET["idPostagem"];
     $result = deletarPostagem($idPostagem, $conn);
     if ($result) {
-        $mensagem = "Postegem deletada com sucesso";
+        $mensagem = "Postagem deletada com sucesso";
         $tipo = "sucesso";
     }
     else {

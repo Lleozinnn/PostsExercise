@@ -49,7 +49,7 @@ function criaMenu($status = false, $titulo)
                 </div>
                 <nav>
                     ' . criarLinkMenu("perfil.php", "Perfil", 'person-outline') . '            
-                    ' . criarLinkMenu("posts.php", "Postagens", 'add-outline') . '
+                    ' . criarLinkMenu("posts.php", "Postagens", 'chatbubble-ellipses-outline') . '
                     ' . criarLinkMenu("inserirPostagem.php", "Postar", 'add-outline') . '    
                     ' . criarLinkMenu("sair.php", "Sair", 'exit-outline') . '
                     ' . criarLinkMenu("deletar_usuario.php", "Excluir dados", 'person-remove-outline') . '    
